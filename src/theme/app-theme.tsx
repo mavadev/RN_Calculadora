@@ -23,8 +23,8 @@ export const styles = StyleSheet.create({
   resultContainer: {
     flex: 1,
     marginBottom: 50,
+    paddingRight: 30,
     paddingVertical: 20,
-    paddingHorizontal: 30,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     borderBottomLeftRadius: 50,
