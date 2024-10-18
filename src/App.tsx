@@ -1,10 +1,14 @@
-import {StatusBar, Text, View} from 'react-native';
+import {StatusBar, View} from 'react-native';
 import {CalculatorScreen} from './screens/CalculatorScreen';
+import {colors, styles} from './theme/app-theme';
 
 export const App = () => {
   return (
-    <View>
-      <StatusBar barStyle={'light-content'} backgroundColor={'black'} />
+    <View style={styles.background}>
+      <StatusBar
+        barStyle={'light-content'}
+        backgroundColor={colors.background}
+      />
       <CalculatorScreen />
     </View>
   );
