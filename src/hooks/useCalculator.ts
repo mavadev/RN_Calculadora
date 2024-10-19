@@ -27,16 +27,38 @@ export const useCalculator = () => {
     setNumber(number+numberStr)
   }
 
-  const deleteNumber = () => {
-    if(number.length == 1) return setNumber('0')
-    setNumber(number.slice(0, number.length-1))
+  const clear = () => {
+    setNumber('0');
+  }
+
+  const deleteOperation = () => {
+    let currentSign = ''
+    let temporalNumber = ''
+
+    if(number.includes('-')){
+      currentSign='-'
+      temporalNumber=number.substring(1)
+    }
+    if(temporalNumber.length > 1 )
+      return setNumber(currentSign + temporalNumber.slice(0, temporalNumber.length-1))
+
+    setNumber('0')
+  }
+
+  const toggleSign = () => {
+    if(number.includes('-'))
+      return setNumber(number.replace('-', ''))
+
+    setNumber(`-${number}`)
   }
 
   return {
     // estado
     number,
     buildNumber,
-    deleteNumber
+    clear,
+    deleteOperation,
+    toggleSign
     // metodos
 
   }

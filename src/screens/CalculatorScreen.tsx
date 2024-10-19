@@ -4,7 +4,8 @@ import {CalculatorButton} from '../components/CalculatorButton';
 import {useCalculator} from '../hooks/useCalculator';
 
 export const CalculatorScreen = () => {
-  const {number, buildNumber, deleteNumber} = useCalculator();
+  const {number, buildNumber, clear, deleteOperation, toggleSign} =
+    useCalculator();
 
   return (
     <View style={styles.calculatorContainer}>
@@ -19,12 +20,12 @@ export const CalculatorScreen = () => {
         <CalculatorButton
           iconName="refresh-outline"
           bgColor={colors.lightGray}
-          onPress={() => console.log('Funciona el boton')}
+          onPress={clear}
         />
         <CalculatorButton
           label="+/-"
           bgColor={colors.lightGray}
-          onPress={() => console.log('Funciona el boton')}
+          onPress={toggleSign}
         />
         <CalculatorButton
           label="%"
@@ -72,7 +73,7 @@ export const CalculatorScreen = () => {
         <CalculatorButton label="." onPress={() => buildNumber('.')} />
         <CalculatorButton
           iconName="return-down-back-outline"
-          onPress={() => deleteNumber()}
+          onPress={deleteOperation}
         />
         <CalculatorButton
           label="="
