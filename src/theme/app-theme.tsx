@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.gray,
   },
   mainResult: {
-    fontSize: 80,
+    fontSize: 100,
     color: colors.textPrimary,
   },
   subResult: {
