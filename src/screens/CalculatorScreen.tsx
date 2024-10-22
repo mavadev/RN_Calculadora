@@ -1,20 +1,18 @@
 import {Text, View} from 'react-native';
 import {colors, styles} from '../theme/app-theme';
 import {CalculatorButton} from '../components/CalculatorButton';
-import {useCalculator} from '../hooks/useCalculator';
+import {Operator, useCalculator} from '../hooks/useCalculator';
 
 export const CalculatorScreen = () => {
   const {
-    number,
-    prevNumber,
+    prevFormula,
+    formula,
+    result,
     buildNumber,
     clear,
     deleteOperation,
     toggleSign,
-    addOperation,
-    subtractOperation,
-    multiplyOperation,
-    divideOperation,
+    setOperation,
     calculateResult,
   } = useCalculator();
 
@@ -25,11 +23,12 @@ export const CalculatorScreen = () => {
           style={styles.mainResult}
           numberOfLines={1}
           adjustsFontSizeToFit
-          minimumFontScale={0.5}>
-          {number}
+          // minimumFontScale={0.5}
+        >
+          {formula}
         </Text>
         <Text adjustsFontSizeToFit numberOfLines={1} style={styles.subResult}>
-          {+prevNumber ? prevNumber : ''}
+          {prevFormula && result}
         </Text>
       </View>
 
@@ -47,12 +46,12 @@ export const CalculatorScreen = () => {
         <CalculatorButton
           label="%"
           bgColor={colors.lightGray}
-          onPress={() => console.log('Funciona el boton')}
+          onPress={() => setOperation(Operator.module)}
         />
         <CalculatorButton
           label="÷"
           bgColor={colors.orange}
-          onPress={divideOperation}
+          onPress={() => setOperation(Operator.divide)}
         />
       </View>
       <View style={styles.rowBtns}>
@@ -62,7 +61,7 @@ export const CalculatorScreen = () => {
         <CalculatorButton
           bgColor={colors.orange}
           iconName="close-outline"
-          onPress={multiplyOperation}
+          onPress={() => setOperation(Operator.multiply)}
         />
       </View>
       <View style={styles.rowBtns}>
@@ -72,7 +71,7 @@ export const CalculatorScreen = () => {
         <CalculatorButton
           bgColor={colors.orange}
           iconName="remove-outline"
-          onPress={subtractOperation}
+          onPress={() => setOperation(Operator.subtract)}
         />
       </View>
       <View style={styles.rowBtns}>
@@ -82,7 +81,7 @@ export const CalculatorScreen = () => {
         <CalculatorButton
           bgColor={colors.orange}
           iconName="add-outline"
-          onPress={addOperation}
+          onPress={() => setOperation(Operator.add)}
         />
       </View>
       <View style={styles.rowBtns}>
