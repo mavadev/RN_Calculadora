@@ -95,25 +95,47 @@ export const useCalculator = () => {
   }
 
   const calculateFormulaResult = () => {
-    let total = 0;
-    let currentOperator: Operator;
-    
     const values = formula.split(" ");
+    let currentOperator: Operator | null = null;
 
-
-    values.forEach(value => {
-      const num = parseFloat(value);
-      if (!isNaN(num)) {
-        if (!currentOperator) {
-          total = num;
+    // Multiplicacion, division, modulo
+    let intermediateValues = [];
+    for (let pos = 0; pos < values.length; pos++) {
+      const value = values[pos];
+      const num = Number(value);
+  
+      if (isNaN(num)) {
+        currentOperator = value as Operator
+        intermediateValues.push(currentOperator);
+      } else {
+        if (currentOperator === Operator.multiply || currentOperator === Operator.divide || currentOperator === Operator.module) {
+          intermediateValues.pop();
+          const prevNum = intermediateValues.pop();
+          const result = applyOperation(Number(prevNum), num, currentOperator);
+          intermediateValues.push(result);
         } else {
-          total = applyOperation(total, num, currentOperator);
+          intermediateValues.push(num);
+        }
+      }
+    }
+
+    // Suma, resta
+    let total = 0;
+    currentOperator = null;
+  
+    for (let pos = 0; pos < intermediateValues.length; pos++) {
+      const value = intermediateValues[pos];
+      if (typeof value === "number") {
+        if (!currentOperator) {
+          total = value;
+        } else {
+          total = applyOperation(total, value, currentOperator);
         }
       } else {
         currentOperator = value as Operator;
       }
-    });
-
+    }
+  
     return total;
   };
 
