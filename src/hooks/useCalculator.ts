@@ -80,6 +80,7 @@ export const useCalculator = () => {
   
   // Construir previa formula + number
   const setOperation = (operator:Operator) => {
+    if(!Number(number)) return;
     const newPrevFormula = `${formula} ${operator} `;
     setPrevFormula(newPrevFormula)
     setNumber('0')
@@ -89,8 +90,8 @@ export const useCalculator = () => {
   const calculateResult = () => {
     const result = calculateFormulaResult();
     setPrevFormula('')
-    setFormula(`${ result }`)
-    setNumber(`${ result }`)
+    setFormula( result )
+    setNumber( result )
     setResult('0')
   }
 
@@ -136,7 +137,8 @@ export const useCalculator = () => {
       }
     }
   
-    return total;
+    if(total % 1 == 0) return `${total}`;
+    return total.toFixed(2);
   };
 
   const applyOperation = (num1: number, num2: number, operator: Operator) => {

@@ -1,14 +1,14 @@
 import {StyleSheet} from 'react-native';
 
 export const colors = {
-  lightGray: '#747373',
-  gray: '#3f3f3f',
-  darkGray: '#2D2D2D',
-  orange: '#e7892b',
-  darkOrange: '#d6502f',
+  resultContainer: '#3f3f3f',
+  btnActions: '#5C8374',
+  btnNumber: '#1d1d1d',
+  btnOperations: '#387478',
+  btnEqual: '#243642',
 
   textPrimary: 'white',
-  textSecondary: '#777',
+  textSecondary: 'rgba(255, 255, 255, 0.6)',
   background: '#141414',
 };
 
@@ -22,39 +22,43 @@ export const styles = StyleSheet.create({
   },
   resultContainer: {
     flex: 1,
-    marginBottom: 50,
-    paddingRight: 30,
-    paddingVertical: 20,
+    paddingHorizontal: 30,
+    paddingVertical: 30,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
-    backgroundColor: colors.gray,
+    backgroundColor: colors.resultContainer,
   },
   mainResult: {
-    fontSize: 80,
+    fontSize: 90,
     color: colors.textPrimary,
   },
   subResult: {
-    fontSize: 50,
+    fontSize: 60,
     color: colors.textSecondary,
   },
+  boxBtns: {
+    gap: 12,
+    marginVertical: 30,
+    marginHorizontal: 15,
+  },
   rowBtns: {
+    gap: 7,
     flexWrap: 'nowrap',
     flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 15,
-    gap: 7,
+    justifyContent: 'space-between',
   },
   button: {
-    width: 95,
-    height: 95,
+    flex: 1,
+    aspectRatio: 1 / 1,
     borderRadius: 100,
     justifyContent: 'center',
+    opacity: 1,
   },
   buttonText: {
     fontSize: 40,
     textAlign: 'center',
-    color: 'whitesmoke',
+    color: colors.textPrimary,
   },
 });
